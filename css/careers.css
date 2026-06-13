@@ -61,3 +61,8 @@
   .careers-cta-inner{flex-direction:column;text-align:center;padding:40px 26px}
   .careers-cta-content p{margin:0 auto}
 }
+
+/* حالة عدم وجود وظائف */
+.jobs-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.jobs-empty i{font-size:2.8rem;color:var(--line);margin-bottom:16px;display:block}
+.jobs-empty p{font-size:1.05rem}
