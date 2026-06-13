@@ -38,7 +38,7 @@
     <h1 class="careers-hero-title">ابنِ مستقبلك المهني مع <span class="gradient-text">UpKnowledge</span></h1>
     <p class="careers-hero-sub">نبحث دائماً عن المواهب الطموحة لتنضم إلى فريقنا. اكتشف الفرص المتاحة في مجالات الموارد البشرية وتكنولوجيا المعلومات وحلول Odoo، وكن جزءاً من بيئة عمل تحفّز الإبداع والنمو.</p>
     <div class="careers-hero-stats">
-      <div class="stat"><span class="stat-num">4</span><span class="stat-label">وظائف متاحة</span></div>
+      <div class="stat"><span class="stat-num" id="jobsCount">4</span><span class="stat-label">وظائف متاحة</span></div>
       <div class="stat"><span class="stat-num">+10</span><span class="stat-label">سنوات خبرة</span></div>
       <div class="stat"><span class="stat-num">100%</span><span class="stat-label">بيئة عمل محفّزة</span></div>
     </div>
@@ -70,86 +70,8 @@
       <h2 class="section-title">الفرص الوظيفية الحالية</h2>
       <p class="section-desc">استعرض الوظائف الشاغرة المتاحة حالياً وقدّم على ما يناسب خبراتك ومهاراتك.</p>
     </div>
-    <div class="jobs-list">
-
-      <article class="job-card">
-        <div class="job-main">
-          <div class="job-icon"><i class="fas fa-users-gear"></i></div>
-          <div class="job-info">
-            <h3 class="job-title">أخصائي موارد بشرية</h3>
-            <div class="job-meta">
-              <span><i class="fas fa-location-dot"></i> بغداد، العراق</span>
-              <span><i class="fas fa-clock"></i> دوام كامل</span>
-              <span><i class="fas fa-layer-group"></i> قسم الموارد البشرية</span>
-            </div>
-            <p class="job-desc">إدارة عمليات التوظيف وإعداد سلم الرواتب وصياغة السياسات الداخلية ومتابعة شؤون الموظفين بكفاءة عالية.</p>
-            <div class="job-tags"><span>توظيف</span><span>رواتب</span><span>سياسات داخلية</span></div>
-          </div>
-        </div>
-        <div class="job-action">
-          <span class="job-badge">الأكثر طلباً</span>
-          <a href="mailto:info@upknowledgeco.com?subject=التقديم على وظيفة أخصائي موارد بشرية" class="btn btn-primary">قدّم الآن <i class="fas fa-arrow-left"></i></a>
-        </div>
-      </article>
-
-      <article class="job-card">
-        <div class="job-main">
-          <div class="job-icon"><i class="fas fa-server"></i></div>
-          <div class="job-info">
-            <h3 class="job-title">مهندس بنية تحتية لتكنولوجيا المعلومات</h3>
-            <div class="job-meta">
-              <span><i class="fas fa-location-dot"></i> بغداد، العراق</span>
-              <span><i class="fas fa-clock"></i> دوام كامل</span>
-              <span><i class="fas fa-layer-group"></i> قسم تكنولوجيا المعلومات</span>
-            </div>
-            <p class="job-desc">تصميم وتطوير البنى التحتية التقنية واختيار الأنظمة المناسبة وتقديم الدعم الفني لضمان استمرارية الأعمال.</p>
-            <div class="job-tags"><span>بنية تحتية</span><span>شبكات</span><span>دعم فني</span></div>
-          </div>
-        </div>
-        <div class="job-action">
-          <a href="mailto:info@upknowledgeco.com?subject=التقديم على وظيفة مهندس بنية تحتية" class="btn btn-primary">قدّم الآن <i class="fas fa-arrow-left"></i></a>
-        </div>
-      </article>
-
-      <article class="job-card">
-        <div class="job-main">
-          <div class="job-icon"><i class="fas fa-cubes"></i></div>
-          <div class="job-info">
-            <h3 class="job-title">مستشار تطبيق أنظمة Odoo</h3>
-            <div class="job-meta">
-              <span><i class="fas fa-location-dot"></i> بغداد، العراق</span>
-              <span><i class="fas fa-clock"></i> دوام كامل</span>
-              <span><i class="fas fa-layer-group"></i> قسم حلول Odoo</span>
-            </div>
-            <p class="job-desc">تطبيق وتكامل أنظمة Odoo للعملاء، وتقديم التطوير المخصص والتدريب والدعم الفني المستمر لضمان نجاح المشاريع.</p>
-            <div class="job-tags"><span>ERP</span><span>Odoo</span><span>تطوير مخصص</span></div>
-          </div>
-        </div>
-        <div class="job-action">
-          <span class="job-badge new">جديد</span>
-          <a href="mailto:info@upknowledgeco.com?subject=التقديم على وظيفة مستشار Odoo" class="btn btn-primary">قدّم الآن <i class="fas fa-arrow-left"></i></a>
-        </div>
-      </article>
-
-      <article class="job-card">
-        <div class="job-main">
-          <div class="job-icon"><i class="fas fa-bullhorn"></i></div>
-          <div class="job-info">
-            <h3 class="job-title">أخصائي تطوير أعمال ومبيعات</h3>
-            <div class="job-meta">
-              <span><i class="fas fa-location-dot"></i> بغداد، العراق</span>
-              <span><i class="fas fa-clock"></i> دوام كامل</span>
-              <span><i class="fas fa-layer-group"></i> قسم التطوير والمبيعات</span>
-            </div>
-            <p class="job-desc">بناء علاقات مع العملاء وتطوير فرص أعمال جديدة وتقديم حلول UpKnowledge بما يحقق نمو الشركة وأهدافها.</p>
-            <div class="job-tags"><span>مبيعات</span><span>تطوير أعمال</span><span>علاقات عملاء</span></div>
-          </div>
-        </div>
-        <div class="job-action">
-          <a href="mailto:info@upknowledgeco.com?subject=التقديم على وظيفة تطوير أعمال" class="btn btn-primary">قدّم الآن <i class="fas fa-arrow-left"></i></a>
-        </div>
-      </article>
-
+    <div id="jobsList" class="jobs-list">
+      <!-- تُعرض الوظائف ديناميكياً من js/jobs.js -->
     </div>
   </div>
 </section>
@@ -189,6 +111,7 @@
   <div class="footer-bottom"><div class="container">© 2024 UpKnowledge. جميع الحقوق محفوظة.</div></div>
 </footer>
 
+<script src="js/jobs.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
