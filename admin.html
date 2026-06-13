@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم | إدارة الوظائف - UpKnowledge</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<header class="header scrolled" id="header">
+  <div class="container header-inner">
+    <a href="index.html#home" class="logo"><span class="logo-mark">Up</span><span class="logo-text">Knowledge</span></a>
+    <nav class="nav">
+      <a href="index.html#home" class="nav-link">الرئيسية</a>
+      <a href="careers.html" class="nav-link">الوظائف</a>
+      <a href="admin.html" class="nav-link active">لوحة التحكم</a>
+    </nav>
+    <a href="careers.html" class="btn btn-nav"><i class="fas fa-up-right-from-square"></i> عرض صفحة الوظائف</a>
+  </div>
+</header>
+
+<main class="admin-main">
+  <div class="container">
+
+    <div class="admin-head">
+      <span class="section-tag">لوحة التحكم</span>
+      <h1 class="admin-title">إدارة الإعلانات الوظيفية</h1>
+      <p class="admin-desc">أضف الوظائف الجديدة أو احذف القديمة، وستظهر التغييرات مباشرة في صفحة الوظائف.</p>
+    </div>
+
+    <div class="admin-grid">
+
+      <!-- نموذج إضافة وظيفة -->
+      <section class="admin-card form-card">
+        <h2 class="card-heading"><i class="fas fa-circle-plus"></i> نشر إعلان وظيفي جديد</h2>
+        <form id="jobForm" class="job-form" novalidate>
+          <div class="form-row">
+            <label for="title">المسمى الوظيفي <span class="req">*</span></label>
+            <input type="text" id="title" name="title" placeholder="مثال: مطوّر واجهات أمامية" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label for="department">القسم <span class="req">*</span></label>
+              <input type="text" id="department" name="department" placeholder="مثال: قسم تكنولوجيا المعلومات" required>
+            </div>
+            <div class="form-row">
+              <label for="location">الموقع <span class="req">*</span></label>
+              <input type="text" id="location" name="location" value="بغداد، العراق" required>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label for="type">نوع الدوام</label>
+              <select id="type" name="type">
+                <option value="دوام كامل">دوام كامل</option>
+                <option value="دوام جزئي">دوام جزئي</option>
+                <option value="عن بُعد">عن بُعد</option>
+                <option value="تدريب">تدريب</option>
+                <option value="عقد مؤقت">عقد مؤقت</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="icon">الأيقونة</label>
+              <select id="icon" name="icon">
+                <option value="fa-briefcase">عام (حقيبة)</option>
+                <option value="fa-users-gear">موارد بشرية</option>
+                <option value="fa-server">بنية تحتية</option>
+                <option value="fa-cubes">Odoo / أنظمة</option>
+                <option value="fa-bullhorn">مبيعات / تسويق</option>
+                <option value="fa-code">برمجة</option>
+                <option value="fa-chart-line">تحليل بيانات</option>
+                <option value="fa-headset">دعم فني</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="desc">وصف الوظيفة <span class="req">*</span></label>
+            <textarea id="desc" name="desc" rows="4" placeholder="اكتب وصفاً مختصراً للمهام والمسؤوليات..." required></textarea>
+          </div>
+          <div class="form-row">
+            <label for="tags">الوسوم <span class="hint">(افصل بينها بفاصلة)</span></label>
+            <input type="text" id="tags" name="tags" placeholder="مثال: برمجة, واجهات, JavaScript">
+          </div>
+          <div class="form-row">
+            <label for="badge">شارة (اختياري)</label>
+            <select id="badge" name="badge">
+              <option value="">بدون شارة</option>
+              <option value="جديد">جديد</option>
+              <option value="الأكثر طلباً">الأكثر طلباً</option>
+              <option value="عاجل">عاجل</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> نشر الإعلان</button>
+            <button type="reset" class="btn btn-ghost-dark">مسح الحقول</button>
+          </div>
+          <p id="formMsg" class="form-msg" role="status"></p>
+        </form>
+      </section>
+
+      <!-- قائمة الإعلانات الحالية -->
+      <section class="admin-card list-card">
+        <div class="list-head">
+          <h2 class="card-heading"><i class="fas fa-list-check"></i> الإعلانات المنشورة <span id="countBadge" class="count-badge">0</span></h2>
+          <button id="resetBtn" class="btn-text-danger" title="استعادة الوظائف الافتراضية"><i class="fas fa-rotate-left"></i> استعادة الافتراضي</button>
+        </div>
+        <div id="adminJobsList" class="admin-jobs-list"></div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom"><div class="container">© 2024 UpKnowledge — لوحة التحكم. جميع الحقوق محفوظة.</div></div>
+</footer>
+
+<script src="js/jobs.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
