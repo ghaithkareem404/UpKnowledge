@@ -149,6 +149,20 @@
 <div class="footer-bottom"><div class="container"><span data-i18n="footer.rights">© 2024 UpKnowledge. جميع الحقوق محفوظة.</span></div></div>
 </footer>
 
+<!-- Supabase client + config -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  window.UPK_SUPABASE = {
+    url: "https://bgamaofokqiicgauqfrx.supabase.co",
+    key: "sb_publishable_hHSPLC_aAFvqTtlSCBj0MQ_rrTrbCyB",
+    bucket: "Private"
+  };
+  try {
+    if (window.supabase && window.UPK_SUPABASE.url) {
+      window.upkSb = window.supabase.createClient(window.UPK_SUPABASE.url, window.UPK_SUPABASE.key);
+    }
+  } catch (e) { console.error("Supabase init failed", e); }
+</script>
 <script src="js/i18n.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/script.js"></script>
