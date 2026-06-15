@@ -285,7 +285,7 @@
     var phoneLbl = tr("careers.form.phone", "رقم الهاتف", "Phone number");
     var phonePh = tr("careers.form.phonePh", "مثال: 07700000000", "e.g. 07700000000");
     var cvLbl = tr("careers.form.cv", "السيرة الذاتية", "Resume / CV");
-    var cvHint = tr("careers.form.cvHint", "صيغة PDF أو Word", "PDF or Word format");
+    var cvHint = tr("careers.form.cvHint", "PDF أو Word أو صورة — بحد أقصى 10 ميغابايت", "PDF, Word, or image — up to 10MB");
     var cvBtn = tr("careers.form.cvBtn", "اختر ملفاً", "Choose a file");
     var noFile = tr("careers.form.noFile", "لم يتم اختيار ملف", "No file selected");
     var submitLbl = tr("careers.form.submit", "إرسال الطلب", "Submit application");
@@ -313,7 +313,7 @@
               '<div class="upk-file">' +
                 '<label for="upkCv" class="upk-file-btn"><i class="fas fa-upload"></i> ' + esc(cvBtn) + '</label>' +
                 '<span class="upk-file-name" id="upkCvName">' + esc(noFile) + '</span>' +
-                '<input type="file" id="upkCv" name="cv" accept=".pdf,.doc,.docx" required hidden>' +
+                '<input type="file" id="upkCv" name="cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" required hidden>' +
               '</div>' +
             '</div>' +
             '<button type="submit" class="btn btn-primary upk-submit-btn">' + esc(submitLbl) + ' <i class="fas fa-paper-plane"></i></button>' +
@@ -326,9 +326,52 @@
 
     var fileInput = doc.getElementById("upkCv");
     var fileName = doc.getElementById("upkCvName");
+    var MAX_BYTES = 10 * 1024 * 1024; // 10MB
+    var ALLOWED_EXT = ["pdf", "doc", "docx", "jpg", "jpeg", "png", "webp"];
+
+    function fileError(msgKey, arF, enF) {
+      var err = form.querySelector(".upk-form-error");
+      if (!err) {
+        err = doc.createElement("p");
+        err.className = "upk-form-error";
+        form.insertBefore(err, form.querySelector(".upk-submit-btn"));
+      }
+      err.textContent = tr(msgKey, arF, enF);
+    }
+
+    function clearError() {
+      var err = form.querySelector(".upk-form-error");
+      if (err) err.remove();
+    }
+
+    function validateFile(file) {
+      if (!file) return false;
+      var ext = (file.name.split(".").pop() || "").toLowerCase();
+      if (ALLOWED_EXT.indexOf(ext) === -1) {
+        fileError("careers.form.badType", "صيغة الملف غير مدعومة. يُسمح بـ PDF أو Word أو صورة فقط.", "Unsupported file type. Only PDF, Word, or image files are allowed.");
+        return false;
+      }
+      if (file.size > MAX_BYTES) {
+        fileError("careers.form.tooBig", "حجم الملف كبير جداً. الحد الأقصى 10 ميغابايت.", "File is too large. Maximum size is 10MB.");
+        return false;
+      }
+      return true;
+    }
+
     if (fileInput) {
       fileInput.addEventListener("change", function () {
-        fileName.textContent = (fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : noFile;
+        var file = (fileInput.files && fileInput.files[0]) ? fileInput.files[0] : null;
+        if (file) {
+          if (!validateFile(file)) {
+            fileInput.value = "";
+            fileName.textContent = noFile;
+            return;
+          }
+          clearError();
+          fileName.textContent = file.name;
+        } else {
+          fileName.textContent = noFile;
+        }
       });
     }
 
@@ -340,6 +383,7 @@
         var phone = (doc.getElementById("upkPhone").value || "").trim();
         var hasCv = fileInput && fileInput.files && fileInput.files.length > 0;
         var invalidMsg = tr("careers.form.invalid", "يرجى تعبئة جميع الحقول وإرفاق سيرتك الذاتية.", "Please fill in all fields and attach your CV.");
+        if (hasCv && !validateFile(fileInput.files[0])) { return; }
         if (!name || !phone || !hasCv) {
           var err = form.querySelector(".upk-form-error");
           if (!err) {
