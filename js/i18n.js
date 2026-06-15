@@ -86,28 +86,39 @@
 
       "common.baghdad": "بغداد، العراق",
 
-      "careers.heroBadge": "انضم إلى رحلة النجاح",
-      "careers.heroTitle": "ابنِ مستقبلك المهني مع <span class=\"gradient-text\">UpKnowledge</span>",
-      "careers.heroSub": "نبحث دائماً عن المواهب الطموحة لتنضم إلى فريقنا. اكتشف الفرص المتاحة في مجالات الموارد البشرية وتكنولوجيا المعلومات وحلول Odoo، وكن جزءاً من بيئة عمل تحفّز الإبداع والنمو.",
-      "careers.stat1": "وظائف متاحة",
-      "careers.stat2": "سنوات خبرة",
-      "careers.stat3": "بيئة عمل محفّزة",
-      "careers.whyTag": "لماذا UpKnowledge",
-      "careers.whyTitle": "بيئة عمل تستحق أن تكون جزءاً منها",
-      "careers.whyDesc": "نؤمن بأن نجاح شركتنا يبدأ من نجاح موظفينا، لذلك نوفر بيئة عمل داعمة ومحفّزة للتطور.",
-      "careers.perk1.title": "نموّ مهني مستمر",
-      "careers.perk1.text": "برامج تدريب وتطوير مستمرة تساعدك على تطوير مهاراتك وتحقيق طموحاتك المهنية.",
-      "careers.perk2.title": "فريق متعاون",
-      "careers.perk2.text": "اعمل ضمن فريق من المحترفين الشغوفين الذين يدعمون بعضهم البعض لتحقيق التميّز.",
-      "careers.perk3.title": "توازن الحياة والعمل",
-      "careers.perk3.text": "نحرص على توفير مرونة في العمل تتيح لك التوازن بين حياتك المهنية والشخصية.",
-      "careers.perk4.title": "مزايا تنافسية",
-      "careers.perk4.text": "رواتب ومزايا مجزية تعكس تقديرنا لجهودك ومساهمتك في نجاح الشركة.",
-      "careers.jobsTag": "الوظائف المتاحة",
-      "careers.jobsTitle": "الفرص الوظيفية الحالية",
-      "careers.jobsDesc": "استعرض الوظائف الشاغرة المتاحة حالياً وقدّم على ما يناسب خبراتك ومهاراتك.",
+      "careers.heroBadge": "شريكك في التوظيف",
+      "careers.heroTitle": "نوصلك بفرصتك المهنية القادمة مع <span class=\"gradient-text\">UpKnowledge</span>",
+      "careers.heroSub": "نعمل كحلقة وصل بين المواهب والشركات. ننشر فرص عمل حقيقية نيابةً عن شركائنا من الشركات، ونتولّى عنك رحلة التوظيف كاملة — من التقديم إلى استلام العرض.",
+      "careers.stat1": "فرص متاحة",
+      "careers.stat2": "شركة شريكة",
+      "careers.stat3": "خدمة مجانية للمرشّحين",
+      "careers.howTag": "آلية العمل",
+      "careers.howTitle": "كيف نعمل؟",
+      "careers.howDesc": "معظم الوظائف المعروضة هنا تابعة لشركات شريكة تبحث عن كفاءات، ونحن نُدير عملية التوظيف بالنيابة عنها لنضمن وصول المرشّح المناسب إلى المكان المناسب.",
+      "careers.step1.title": "ننشر الفرصة",
+      "careers.step1.text": "نعلن عن الوظائف الشاغرة لدى الشركات الشريكة بتفاصيل واضحة وشفّافة.",
+      "careers.step2.title": "نستقبل ونفرز الطلبات",
+      "careers.step2.text": "نراجع السير الذاتية ونختار المرشّحين الأكثر توافقاً مع متطلبات الوظيفة.",
+      "careers.step3.title": "نُقابل ونقيّم",
+      "careers.step3.text": "نُجري المقابلات والتقييمات للتأكد من مهارات المرشّح وملاءمته للدور.",
+      "careers.step4.title": "نرشّحك للشركة",
+      "careers.step4.text": "نرسل المرشّحين المناسبين إلى الشركة صاحبة الوظيفة لإتمام خطوات التعيين النهائية.",
+      "careers.whyTag": "لماذا تتقدّم عبرنا",
+      "careers.whyTitle": "مزايا تجعل رحلتك المهنية أسهل",
+      "careers.whyDesc": "نوفّر لك تجربة توظيف شفّافة وداعمة تربطك بأفضل الفرص لدى شركائنا من الشركات.",
+      "careers.perk1.title": "فرص حصرية",
+      "careers.perk1.text": "نتعامل مع شركات لا تُعلن عن وظائفها مباشرةً، فنفتح لك أبواباً لا تجدها في مكان آخر.",
+      "careers.perk2.title": "متابعة شخصية",
+      "careers.perk2.text": "نرافقك في كل مرحلة من مراحل التقديم ونبقيك على اطّلاع دائم بحالة طلبك.",
+      "careers.perk3.title": "توافق دقيق",
+      "careers.perk3.text": "نرشّحك للأدوار التي تناسب خبراتك ومهاراتك فعلاً، لا لأي وظيفة عشوائية.",
+      "careers.perk4.title": "خدمة مجانية للمرشّحين",
+      "careers.perk4.text": "لا نتقاضى أي رسوم من الباحثين عن عمل — خدمتنا مجانية بالكامل للمرشّحين.",
+      "careers.jobsTag": "الفرص المتاحة",
+      "careers.jobsTitle": "الفرص المتاحة حالياً",
+      "careers.jobsDesc": "استعرض الوظائف المفتوحة لدى شركائنا، وقدّم على ما يناسب خبراتك ومهاراتك.",
       "careers.ctaTitle": "لم تجد الوظيفة المناسبة؟",
-      "careers.ctaText": "نرحّب دائماً بالمواهب المتميّزة. أرسل لنا سيرتك الذاتية وسنتواصل معك عند توفّر فرصة تناسب خبراتك.",
+      "careers.ctaText": "أرسل سيرتك الذاتية لننضمّك إلى قاعدة المرشّحين لدينا، وسنتواصل معك فور توفّر فرصة لدى إحدى الشركات الشريكة تناسب مهاراتك.",
       "careers.ctaBtn": "أرسل سيرتك الذاتية",
       "careers.apply": "قدّم الآن",
       "careers.empty": "لا توجد وظائف متاحة حالياً. يرجى المتابعة لاحقاً."
@@ -191,28 +202,39 @@
 
       "common.baghdad": "Baghdad, Iraq",
 
-      "careers.heroBadge": "Join the success journey",
-      "careers.heroTitle": "Build your career with <span class=\"gradient-text\">UpKnowledge</span>",
-      "careers.heroSub": "We are always looking for ambitious talent to join our team. Discover the opportunities available in human resources, information technology, and Odoo solutions, and be part of a work environment that fosters creativity and growth.",
-      "careers.stat1": "Open positions",
-      "careers.stat2": "Years of experience",
-      "careers.stat3": "Motivating environment",
-      "careers.whyTag": "Why UpKnowledge",
-      "careers.whyTitle": "A workplace worth being part of",
-      "careers.whyDesc": "We believe our company's success starts with our employees' success, so we provide a supportive and motivating work environment for growth.",
-      "careers.perk1.title": "Continuous career growth",
-      "careers.perk1.text": "Ongoing training and development programs that help you develop your skills and achieve your career ambitions.",
-      "careers.perk2.title": "Collaborative team",
-      "careers.perk2.text": "Work within a team of passionate professionals who support each other to achieve excellence.",
-      "careers.perk3.title": "Work-life balance",
-      "careers.perk3.text": "We ensure flexible work that lets you balance your professional and personal life.",
-      "careers.perk4.title": "Competitive benefits",
-      "careers.perk4.text": "Rewarding salaries and benefits that reflect our appreciation for your efforts and contribution.",
+      "careers.heroBadge": "Your recruitment partner",
+      "careers.heroTitle": "We connect you to your next opportunity with <span class=\"gradient-text\">UpKnowledge</span>",
+      "careers.heroSub": "We bridge the gap between talent and companies. We post real openings on behalf of our partner companies and manage your entire hiring journey — from application to offer.",
+      "careers.stat1": "Open opportunities",
+      "careers.stat2": "Partner companies",
+      "careers.stat3": "Free for candidates",
+      "careers.howTag": "How We Work",
+      "careers.howTitle": "How we work",
+      "careers.howDesc": "Most of the roles listed here belong to partner companies seeking talent. We manage the recruitment process on their behalf to ensure the right candidate reaches the right place.",
+      "careers.step1.title": "We post the role",
+      "careers.step1.text": "We advertise our partner companies' openings with clear, transparent details.",
+      "careers.step2.title": "We screen applications",
+      "careers.step2.text": "We review CVs and shortlist the candidates who best match the role.",
+      "careers.step3.title": "We interview & assess",
+      "careers.step3.text": "We conduct interviews and assessments to verify each candidate's skills and fit.",
+      "careers.step4.title": "We refer you to the company",
+      "careers.step4.text": "We send qualified candidates to the hiring company to complete the final hiring steps.",
+      "careers.whyTag": "Why apply through us",
+      "careers.whyTitle": "Advantages that make your career journey easier",
+      "careers.whyDesc": "We give you a transparent, supportive hiring experience that connects you with the best opportunities at our partner companies.",
+      "careers.perk1.title": "Exclusive access",
+      "careers.perk1.text": "We work with companies that don't advertise their roles publicly, opening doors you won't find elsewhere.",
+      "careers.perk2.title": "Personal follow-up",
+      "careers.perk2.text": "We guide you through every stage of the application and keep you updated on your status.",
+      "careers.perk3.title": "Precise matching",
+      "careers.perk3.text": "We refer you to roles that genuinely fit your experience and skills, not just any opening.",
+      "careers.perk4.title": "Free for candidates",
+      "careers.perk4.text": "We never charge job seekers any fees — our service is completely free for candidates.",
       "careers.jobsTag": "Open Positions",
-      "careers.jobsTitle": "Current job opportunities",
-      "careers.jobsDesc": "Browse the currently available vacancies and apply for what matches your experience and skills.",
-      "careers.ctaTitle": "Didn't find the right job?",
-      "careers.ctaText": "We always welcome outstanding talent. Send us your resume and we'll contact you when an opportunity matching your experience becomes available.",
+      "careers.jobsTitle": "Current opportunities",
+      "careers.jobsDesc": "Browse open roles at our partner companies and apply to what fits your experience and skills.",
+      "careers.ctaTitle": "Didn't find the right role?",
+      "careers.ctaText": "Submit your CV to join our candidate pool, and we'll reach out as soon as a matching opportunity opens at one of our partner companies.",
       "careers.ctaBtn": "Send your resume",
       "careers.apply": "Apply Now",
       "careers.empty": "No positions available at the moment. Please check back later."
@@ -241,27 +263,23 @@
     html.setAttribute("dir", lang === "en" ? "ltr" : "rtl");
     doc.body.setAttribute("data-lang", lang);
 
-    // text content
     doc.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       var val = t(key, lang);
       if (val != null) el.textContent = val;
     });
 
-    // html content (for strings with inline markup)
     doc.querySelectorAll("[data-i18n-html]").forEach(function (el) {
       var key = el.getAttribute("data-i18n-html");
       var val = t(key, lang);
       if (val != null) el.innerHTML = val;
     });
 
-    // toggle button label shows the OTHER language
     var btn = doc.getElementById("langToggle");
     if (btn) btn.innerHTML = '<i class="fas fa-globe"></i> ' + (lang === "en" ? "العربية" : "English");
 
     try { global.localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
 
-    // notify other scripts (e.g. jobs renderer) that language changed
     try {
       doc.dispatchEvent(new global.CustomEvent("upk:langchange", { detail: { lang: lang } }));
     } catch (e) {}
