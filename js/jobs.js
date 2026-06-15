@@ -454,6 +454,7 @@
     var ext = (file.name.split(".").pop() || "bin").toLowerCase();
     var safeName = (name.replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 40)) || "candidate";
     var path = "cvs/" + Date.now() + "_" + safeName + "." + ext;
+    var sharedPublicUrl = "";
 
     global.upkSb.storage.from(bucket).upload(path, file, {
       contentType: file.type || "application/octet-stream",
@@ -467,6 +468,7 @@
         publicUrl = (pu && pu.data && pu.data.publicUrl) ? pu.data.publicUrl : "";
       } catch (e) {}
 
+      sharedPublicUrl = publicUrl;
       return global.upkSb.from("applications").insert([{
         full_name: name,
         phone: phone,
@@ -479,7 +481,7 @@
     }).then(function (ins) {
       if (ins && ins.error) { throw ins.error; }
       // إرسال إيميلَي الإشعار (للشركة + للمتقدم) عبر Edge Function — لا يقطع النجاح إن فشل
-      sendApplicationEmails({ name: name, phone: phone, email: email, jobTitle: jobTitle, jobId: jobId, cvPath: path, cvUrl: publicUrl, lang: currentLang() });
+      sendApplicationEmails({ name: name, phone: phone, email: email, jobTitle: jobTitle, jobId: jobId, cvPath: path, cvUrl: sharedPublicUrl, lang: currentLang() });
       showSuccess(jobTitle, name);
     }).catch(function (err) {
       console.error("Application submit error:", err);
