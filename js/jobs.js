@@ -463,6 +463,8 @@
       }]);
     }).then(function (ins) {
       if (ins && ins.error) { throw ins.error; }
+      // إرسال إيميلَي الإشعار (للشركة + للمتقدم) عبر Edge Function — لا يقطع النجاح إن فشل
+      sendApplicationEmails({ name: name, phone: phone, jobTitle: jobTitle, jobId: jobId, cvPath: path, cvUrl: publicUrl, lang: currentLang() });
       showSuccess(jobTitle, name);
     }).catch(function (err) {
       console.error("Application submit error:", err);
@@ -470,6 +472,43 @@
       setError(failMsg);
     });
   }
+
+  function sendApplicationEmails(payload) {
+
+    try {
+
+      var cfg = global.UPK_SUPABASE || {};
+
+      if (!cfg.url || !cfg.key) return;
+
+      var endpoint = cfg.url.replace(/\/+$/, "") + "/functions/v1/send-application-emails";
+
+      global.fetch(endpoint, {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type": "application/json",
+
+          "Authorization": "Bearer " + cfg.key,
+
+          "apikey": cfg.key
+
+        },
+
+        body: JSON.stringify(payload)
+
+      }).then(function (r) {
+
+        if (!r.ok) { console.warn("Email function returned status", r.status); }
+
+      }).catch(function (e) { console.warn("Email function call failed:", e); });
+
+    } catch (e) { console.warn("sendApplicationEmails error:", e); }
+
+  }
+
 
   function showSuccess(jobTitle, name) {
     var doc = global.document;
