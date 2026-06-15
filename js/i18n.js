@@ -257,7 +257,7 @@
 
     // toggle button label shows the OTHER language
     var btn = doc.getElementById("langToggle");
-    if (btn) btn.textContent = lang === "en" ? "ع" : "EN";
+    if (btn) btn.innerHTML = '<i class="fas fa-globe"></i> ' + (lang === "en" ? "العربية" : "English");
 
     try { global.localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
 
