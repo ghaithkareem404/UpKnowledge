@@ -172,3 +172,39 @@ img{max-width:100%}
   .stat-num{font-size:30px}
   .trusted-logos{gap:34px}
 }
+
+
+/* ===== Language Toggle Button ===== */
+.lang-toggle {
+  margin-inline-start: 14px;
+  min-width: 42px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1.5px solid rgba(9, 36, 66, 0.18);
+  background: transparent;
+  color: #092442;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lang-toggle:hover {
+  background: #092442;
+  color: #fff;
+  border-color: #092442;
+}
+.header.scrolled .lang-toggle {
+  border-color: rgba(9, 36, 66, 0.2);
+}
+@media (max-width: 768px) {
+  .lang-toggle {
+    margin-inline-start: auto;
+    margin-inline-end: 10px;
+  }
+}
