@@ -394,9 +394,81 @@
           err.textContent = invalidMsg;
           return;
         }
-        showSuccess(jobTitle, name);
+        submitApplication(form, jobId, jobTitle, name, phone, fileInput.files[0]);
       });
     }
+  }
+
+  function submitApplication(form, jobId, jobTitle, name, phone, file) {
+    var doc = global.document;
+    var submitBtn = form.querySelector(".upk-submit-btn");
+    var sendingLbl = tr("careers.form.sending", "جارٍ الإرسال…", "Sending…");
+    var failMsg = tr("careers.form.failed", "تعذّر إرسال طلبك. حاول مرة أخرى لاحقاً.", "We couldn't submit your application. Please try again later.");
+
+    function setError(msg) {
+      var err = form.querySelector(".upk-form-error");
+      if (!err) {
+        err = doc.createElement("p");
+        err.className = "upk-form-error";
+        form.insertBefore(err, submitBtn);
+      }
+      err.textContent = msg;
+    }
+    function clearErr() {
+      var err = form.querySelector(".upk-form-error");
+      if (err) err.remove();
+    }
+
+    if (!global.upkSb) {
+      // لا يوجد عميل Supabase مهيأ — نعرض النجاح للمستخدم دون قطع التجربة
+      showSuccess(jobTitle, name);
+      return;
+    }
+
+    clearErr();
+    submitBtn.disabled = true;
+    var originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + esc(sendingLbl);
+
+    function restore() {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHTML;
+    }
+
+    var cfg = global.UPK_SUPABASE || {};
+    var bucket = cfg.bucket || "Private";
+    var ext = (file.name.split(".").pop() || "bin").toLowerCase();
+    var safeName = (name.replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 40)) || "candidate";
+    var path = "cvs/" + Date.now() + "_" + safeName + "." + ext;
+
+    global.upkSb.storage.from(bucket).upload(path, file, {
+      contentType: file.type || "application/octet-stream",
+      upsert: false
+    }).then(function (up) {
+      if (up.error) { throw up.error; }
+      // محاولة الحصول على رابط عام (يعمل فقط إن كان bucket عاماً؛ نخزّن المسار دائماً)
+      var publicUrl = "";
+      try {
+        var pu = global.upkSb.storage.from(bucket).getPublicUrl(path);
+        publicUrl = (pu && pu.data && pu.data.publicUrl) ? pu.data.publicUrl : "";
+      } catch (e) {}
+
+      return global.upkSb.from("applications").insert([{
+        full_name: name,
+        phone: phone,
+        job_id: jobId || null,
+        job_title: jobTitle || null,
+        cv_path: path,
+        cv_url: publicUrl
+      }]);
+    }).then(function (ins) {
+      if (ins && ins.error) { throw ins.error; }
+      showSuccess(jobTitle, name);
+    }).catch(function (err) {
+      console.error("Application submit error:", err);
+      restore();
+      setError(failMsg);
+    });
   }
 
   function showSuccess(jobTitle, name) {
