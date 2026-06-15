@@ -284,6 +284,8 @@
     var namePh = tr("careers.form.namePh", "اكتب اسمك الكامل", "Enter your full name");
     var phoneLbl = tr("careers.form.phone", "رقم الهاتف", "Phone number");
     var phonePh = tr("careers.form.phonePh", "مثال: 07700000000", "e.g. 07700000000");
+    var emailLbl = tr("careers.form.email", "البريد الإلكتروني", "Email address");
+    var emailPh = tr("careers.form.emailPh", "example@email.com", "example@email.com");
     var cvLbl = tr("careers.form.cv", "السيرة الذاتية", "Resume / CV");
     var cvHint = tr("careers.form.cvHint", "PDF أو Word أو صورة — بحد أقصى 10 ميغابايت", "PDF, Word, or image — up to 10MB");
     var cvBtn = tr("careers.form.cvBtn", "اختر ملفاً", "Choose a file");
@@ -307,6 +309,10 @@
             '<div class="upk-field">' +
               '<label for="upkPhone">' + esc(phoneLbl) + ' <span class="req">*</span></label>' +
               '<input type="tel" id="upkPhone" name="phone" placeholder="' + esc(phonePh) + '" dir="ltr" required>' +
+            '</div>' +
+            '<div class="upk-field">' +
+            '<label for="upkEmail">' + esc(emailLbl) + ' <span class="req">*</span></label>' +
+            '<input type="email" id="upkEmail" name="email" placeholder="' + esc(emailPh) + '" dir="ltr" required>' +
             '</div>' +
             '<div class="upk-field">' +
               '<label>' + esc(cvLbl) + ' <span class="req">*</span> <small>(' + esc(cvHint) + ')</small></label>' +
@@ -381,10 +387,11 @@
         e.preventDefault();
         var name = (doc.getElementById("upkName").value || "").trim();
         var phone = (doc.getElementById("upkPhone").value || "").trim();
+        var email = (doc.getElementById("upkEmail").value || "").trim();
         var hasCv = fileInput && fileInput.files && fileInput.files.length > 0;
         var invalidMsg = tr("careers.form.invalid", "يرجى تعبئة جميع الحقول وإرفاق سيرتك الذاتية.", "Please fill in all fields and attach your CV.");
         if (hasCv && !validateFile(fileInput.files[0])) { return; }
-        if (!name || !phone || !hasCv) {
+        if (!name || !phone || !email || !hasCv) {
           var err = form.querySelector(".upk-form-error");
           if (!err) {
             err = doc.createElement("p");
@@ -394,12 +401,19 @@
           err.textContent = invalidMsg;
           return;
         }
-        submitApplication(form, jobId, jobTitle, name, phone, fileInput.files[0]);
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(email)) {
+          var ee = form.querySelector(".upk-form-error");
+          if (!ee) { ee = doc.createElement("p"); ee.className = "upk-form-error"; form.insertBefore(ee, form.querySelector(".upk-submit-btn")); }
+          ee.textContent = tr("careers.form.badEmail", "يرجى إدخال بريد إلكتروني صحيح.", "Please enter a valid email address.");
+          return;
+        }
+        submitApplication(form, jobId, jobTitle, name, phone, email, fileInput.files[0]);
       });
     }
   }
 
-  function submitApplication(form, jobId, jobTitle, name, phone, file) {
+  function submitApplication(form, jobId, jobTitle, name, phone, email, file) {
     var doc = global.document;
     var submitBtn = form.querySelector(".upk-submit-btn");
     var sendingLbl = tr("careers.form.sending", "جارٍ الإرسال…", "Sending…");
@@ -456,6 +470,7 @@
       return global.upkSb.from("applications").insert([{
         full_name: name,
         phone: phone,
+        email: email,
         job_id: jobId || null,
         job_title: jobTitle || null,
         cv_path: path,
@@ -464,7 +479,7 @@
     }).then(function (ins) {
       if (ins && ins.error) { throw ins.error; }
       // إرسال إيميلَي الإشعار (للشركة + للمتقدم) عبر Edge Function — لا يقطع النجاح إن فشل
-      sendApplicationEmails({ name: name, phone: phone, jobTitle: jobTitle, jobId: jobId, cvPath: path, cvUrl: publicUrl, lang: currentLang() });
+      sendApplicationEmails({ name: name, phone: phone, email: email, jobTitle: jobTitle, jobId: jobId, cvPath: path, cvUrl: publicUrl, lang: currentLang() });
       showSuccess(jobTitle, name);
     }).catch(function (err) {
       console.error("Application submit error:", err);
