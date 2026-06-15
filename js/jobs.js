@@ -15,8 +15,17 @@
     } catch (e) { return "ar"; }
   }
 
-  // الوظائف الافتراضية تُعرض عند عدم وجود إعلانات منشورة من الأدمن
-  // كل وظيفة تحمل النص العربي والإنكليزي
+  function tr(key, fallbackAr, fallbackEn) {
+    var lang = currentLang();
+    try {
+      if (global.UpKnowledgeI18n) {
+        var v = global.UpKnowledgeI18n.t(key, lang);
+        if (v != null && v !== key) return v;
+      }
+    } catch (e) {}
+    return lang === "en" ? fallbackEn : fallbackAr;
+  }
+
   var DEFAULT_JOBS = [
     {
       id: "default-1",
@@ -80,7 +89,6 @@
     }
   ];
 
-  /* ----- التخزين ----- */
   function getStoredJobs() {
     try {
       var raw = global.localStorage.getItem(STORAGE_KEY);
@@ -96,7 +104,6 @@
     global.localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs));
   }
 
-  // ترجع الوظائف المخزّنة أو الافتراضية إن لم توجد
   function getJobs() {
     var stored = getStoredJobs();
     return stored !== null ? stored : DEFAULT_JOBS.slice();
@@ -122,8 +129,6 @@
     return DEFAULT_JOBS.slice();
   }
 
-  /* ----- اختيار الحقل حسب اللغة ----- */
-  // ترجع نسخة من الوظيفة بالحقول المناسبة للغة الحالية
   function localizeJob(job, lang) {
     if (lang === "en" && job.en) {
       return {
@@ -141,7 +146,6 @@
     return job;
   }
 
-  /* ----- أدوات مساعدة ----- */
   function esc(str) {
     return String(str == null ? "" : str)
       .replace(/&/g, "&amp;")
@@ -154,16 +158,11 @@
     return (badge === "جديد" || badge === "New") ? "job-badge new" : "job-badge";
   }
 
-  function buildMailto(title) {
-    return "mailto:info@upknowledgeco.com?subject=" +
-      encodeURIComponent("التقديم على وظيفة " + title);
-  }
+  function detailsLabel() { return tr("careers.details", "التفاصيل", "Details"); }
+  function applyLabel()   { return tr("careers.apply", "قدّم الآن", "Apply Now"); }
 
-  function applyLabel(lang) {
-    return lang === "en" ? "Apply Now" : "قدّم الآن";
-  }
+  var jobsIndex = {};
 
-  /* ----- بناء بطاقة وظيفة ----- */
   function jobCardHTML(job, lang) {
     lang = lang || currentLang();
     var j = localizeJob(job, lang);
@@ -174,29 +173,225 @@
     var badge = j.badge
       ? '<span class="' + badgeClass(j.badge) + '">' + esc(j.badge) + "</span>"
       : "";
+    var arrow = lang === "en" ? "fa-arrow-right" : "fa-arrow-left";
 
     return "" +
       '<article class="job-card">' +
-      '<div class="job-main">' +
-      '<div class="job-icon"><i class="fas ' + esc(icon) + '"></i></div>' +
-      '<div class="job-info">' +
-      '<h3 class="job-title">' + esc(j.title) + "</h3>" +
-      '<div class="job-meta">' +
-      '<span><i class="fas fa-location-dot"></i> ' + esc(j.location) + "</span>" +
-      '<span><i class="fas fa-clock"></i> ' + esc(j.type) + "</span>" +
-      '<span><i class="fas fa-layer-group"></i> ' + esc(j.department) + "</span>" +
-      "</div>" +
-      '<p class="job-desc">' + esc(j.desc) + "</p>" +
-      '<div class="job-tags">' + tags + "</div>" +
-      "</div>" +
-      "</div>" +
-      '<div class="job-action">' + badge +
-      '<a href="' + buildMailto(j.title) + '" class="btn btn-primary">' + esc(applyLabel(lang)) + ' <i class="fas fa-arrow-left"></i></a>' +
-      "</div>" +
+        '<div class="job-main">' +
+          '<div class="job-icon"><i class="fas ' + esc(icon) + '"></i></div>' +
+          '<div class="job-info">' +
+            '<h3 class="job-title">' + esc(j.title) + "</h3>" +
+            '<div class="job-meta">' +
+              '<span><i class="fas fa-location-dot"></i> ' + esc(j.location) + "</span>" +
+              '<span><i class="fas fa-clock"></i> ' + esc(j.type) + "</span>" +
+              '<span><i class="fas fa-layer-group"></i> ' + esc(j.department) + "</span>" +
+            "</div>" +
+            '<p class="job-desc">' + esc(j.desc) + "</p>" +
+            '<div class="job-tags">' + tags + "</div>" +
+          "</div>" +
+        "</div>" +
+        '<div class="job-action">' + badge +
+          '<button type="button" class="btn btn-primary job-details-btn" data-job-id="' + esc(j.id) + '">' +
+            esc(detailsLabel()) + ' <i class="fas ' + arrow + '"></i></button>' +
+        "</div>" +
       "</article>";
   }
 
-  /* ----- عرض الوظائف في صفحة الوظائف ----- */
+  function ensureModalRoot() {
+    var doc = global.document;
+    var root = doc.getElementById("upkModalRoot");
+    if (!root) {
+      root = doc.createElement("div");
+      root.id = "upkModalRoot";
+      doc.body.appendChild(root);
+    }
+    return root;
+  }
+
+  function closeModal() {
+    var doc = global.document;
+    var root = doc.getElementById("upkModalRoot");
+    if (root) root.innerHTML = "";
+    doc.body.classList.remove("upk-modal-open");
+  }
+
+  function openDetails(jobId) {
+    var doc = global.document;
+    var lang = currentLang();
+    var raw = jobsIndex[jobId];
+    if (!raw) return;
+    var j = localizeJob(raw, lang);
+    var root = ensureModalRoot();
+
+    var tags = (j.tags || []).map(function (t) {
+      return "<span>" + esc(t) + "</span>";
+    }).join("");
+
+    var aboutTitle = tr("careers.modal.about", "عن الوظيفة", "About the role");
+    var detailsTitle = tr("careers.modal.details", "تفاصيل الوظيفة", "Job details");
+    var locLbl = tr("careers.modal.location", "الموقع", "Location");
+    var typeLbl = tr("careers.modal.type", "نوع الدوام", "Job type");
+    var deptLbl = tr("careers.modal.dept", "القسم", "Department");
+    var skillsLbl = tr("careers.modal.skills", "المهارات المطلوبة", "Required skills");
+
+    var html =
+      '<div class="upk-modal-overlay" data-close="1">' +
+        '<div class="upk-modal" role="dialog" aria-modal="true">' +
+          '<button type="button" class="upk-modal-close" data-close="1" aria-label="close"><i class="fas fa-times"></i></button>' +
+          '<div class="upk-modal-head">' +
+            '<div class="job-icon"><i class="fas ' + esc(j.icon || "fa-briefcase") + '"></i></div>' +
+            '<div>' +
+              '<h2 class="upk-modal-title">' + esc(j.title) + '</h2>' +
+              '<div class="job-meta">' +
+                '<span><i class="fas fa-location-dot"></i> ' + esc(j.location) + '</span>' +
+                '<span><i class="fas fa-clock"></i> ' + esc(j.type) + '</span>' +
+                '<span><i class="fas fa-layer-group"></i> ' + esc(j.department) + '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="upk-modal-body">' +
+            '<h3 class="upk-modal-sub">' + esc(aboutTitle) + '</h3>' +
+            '<p class="upk-modal-text">' + esc(j.desc) + '</p>' +
+            '<h3 class="upk-modal-sub">' + esc(detailsTitle) + '</h3>' +
+            '<ul class="upk-modal-list">' +
+              '<li><i class="fas fa-location-dot"></i><span><strong>' + esc(locLbl) + ':</strong> ' + esc(j.location) + '</span></li>' +
+              '<li><i class="fas fa-clock"></i><span><strong>' + esc(typeLbl) + ':</strong> ' + esc(j.type) + '</span></li>' +
+              '<li><i class="fas fa-layer-group"></i><span><strong>' + esc(deptLbl) + ':</strong> ' + esc(j.department) + '</span></li>' +
+            '</ul>' +
+            (tags ? ('<h3 class="upk-modal-sub">' + esc(skillsLbl) + '</h3><div class="job-tags upk-modal-tags">' + tags + '</div>') : '') +
+          '</div>' +
+          '<div class="upk-modal-foot">' +
+            '<button type="button" class="btn btn-primary upk-apply-btn" data-job-id="' + esc(j.id) + '">' +
+              esc(applyLabel()) + ' <i class="fas fa-paper-plane"></i></button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    root.innerHTML = html;
+    doc.body.classList.add("upk-modal-open");
+  }
+
+  function openApplyForm(jobId) {
+    var doc = global.document;
+    var lang = currentLang();
+    var raw = jobsIndex[jobId];
+    var jobTitle = "";
+    if (raw) { jobTitle = localizeJob(raw, lang).title; }
+    var root = ensureModalRoot();
+
+    var formTitle = tr("careers.form.title", "التقديم على الوظيفة", "Apply for this role");
+    var nameLbl = tr("careers.form.name", "الاسم الكامل", "Full name");
+    var namePh = tr("careers.form.namePh", "اكتب اسمك الكامل", "Enter your full name");
+    var phoneLbl = tr("careers.form.phone", "رقم الهاتف", "Phone number");
+    var phonePh = tr("careers.form.phonePh", "مثال: 07700000000", "e.g. 07700000000");
+    var cvLbl = tr("careers.form.cv", "السيرة الذاتية", "Resume / CV");
+    var cvHint = tr("careers.form.cvHint", "صيغة PDF أو Word", "PDF or Word format");
+    var cvBtn = tr("careers.form.cvBtn", "اختر ملفاً", "Choose a file");
+    var noFile = tr("careers.form.noFile", "لم يتم اختيار ملف", "No file selected");
+    var submitLbl = tr("careers.form.submit", "إرسال الطلب", "Submit application");
+    var forRole = tr("careers.form.forRole", "للوظيفة", "For role");
+
+    var html =
+      '<div class="upk-modal-overlay" data-close="1">' +
+        '<div class="upk-modal upk-modal-sm" role="dialog" aria-modal="true">' +
+          '<button type="button" class="upk-modal-close" data-close="1" aria-label="close"><i class="fas fa-times"></i></button>' +
+          '<div class="upk-form-head">' +
+            '<h2 class="upk-modal-title">' + esc(formTitle) + '</h2>' +
+            (jobTitle ? '<p class="upk-form-role"><i class="fas fa-briefcase"></i> ' + esc(forRole) + ': <strong>' + esc(jobTitle) + '</strong></p>' : '') +
+          '</div>' +
+          '<form class="upk-apply-form" id="upkApplyForm" novalidate>' +
+            '<div class="upk-field">' +
+              '<label for="upkName">' + esc(nameLbl) + ' <span class="req">*</span></label>' +
+              '<input type="text" id="upkName" name="name" placeholder="' + esc(namePh) + '" required>' +
+            '</div>' +
+            '<div class="upk-field">' +
+              '<label for="upkPhone">' + esc(phoneLbl) + ' <span class="req">*</span></label>' +
+              '<input type="tel" id="upkPhone" name="phone" placeholder="' + esc(phonePh) + '" dir="ltr" required>' +
+            '</div>' +
+            '<div class="upk-field">' +
+              '<label>' + esc(cvLbl) + ' <span class="req">*</span> <small>(' + esc(cvHint) + ')</small></label>' +
+              '<div class="upk-file">' +
+                '<label for="upkCv" class="upk-file-btn"><i class="fas fa-upload"></i> ' + esc(cvBtn) + '</label>' +
+                '<span class="upk-file-name" id="upkCvName">' + esc(noFile) + '</span>' +
+                '<input type="file" id="upkCv" name="cv" accept=".pdf,.doc,.docx" required hidden>' +
+              '</div>' +
+            '</div>' +
+            '<button type="submit" class="btn btn-primary upk-submit-btn">' + esc(submitLbl) + ' <i class="fas fa-paper-plane"></i></button>' +
+          '</form>' +
+        '</div>' +
+      '</div>';
+
+    root.innerHTML = html;
+    doc.body.classList.add("upk-modal-open");
+
+    var fileInput = doc.getElementById("upkCv");
+    var fileName = doc.getElementById("upkCvName");
+    if (fileInput) {
+      fileInput.addEventListener("change", function () {
+        fileName.textContent = (fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : noFile;
+      });
+    }
+
+    var form = doc.getElementById("upkApplyForm");
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = (doc.getElementById("upkName").value || "").trim();
+        var phone = (doc.getElementById("upkPhone").value || "").trim();
+        var hasCv = fileInput && fileInput.files && fileInput.files.length > 0;
+        var invalidMsg = tr("careers.form.invalid", "يرجى تعبئة جميع الحقول وإرفاق سيرتك الذاتية.", "Please fill in all fields and attach your CV.");
+        if (!name || !phone || !hasCv) {
+          var err = form.querySelector(".upk-form-error");
+          if (!err) {
+            err = doc.createElement("p");
+            err.className = "upk-form-error";
+            form.insertBefore(err, form.querySelector(".upk-submit-btn"));
+          }
+          err.textContent = invalidMsg;
+          return;
+        }
+        showSuccess(jobTitle, name);
+      });
+    }
+  }
+
+  function showSuccess(jobTitle, name) {
+    var doc = global.document;
+    var root = ensureModalRoot();
+    var thanksTitle = tr("careers.form.successTitle", "تم استلام طلبك بنجاح!", "Your application has been received!");
+    var thanksText = tr("careers.form.successText", "شكراً لك. راجع فريقنا طلبك وسنتواصل معك قريباً في حال توافق ملفك مع متطلبات الوظيفة.", "Thank you. Our team will review your application and reach out soon if your profile matches the role's requirements.");
+    var doneLbl = tr("careers.form.done", "تم", "Done");
+    var html =
+      '<div class="upk-modal-overlay" data-close="1">' +
+        '<div class="upk-modal upk-modal-sm upk-modal-success" role="dialog" aria-modal="true">' +
+          '<div class="upk-success-icon"><i class="fas fa-circle-check"></i></div>' +
+          '<h2 class="upk-modal-title">' + esc(thanksTitle) + '</h2>' +
+          '<p class="upk-modal-text" style="text-align:center">' + esc(thanksText) + '</p>' +
+          '<button type="button" class="btn btn-primary" data-close="1">' + esc(doneLbl) + '</button>' +
+        '</div>' +
+      '</div>';
+    root.innerHTML = html;
+  }
+
+  function bindGlobalHandlers() {
+    var doc = global.document;
+    doc.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t.closest) return;
+      var detBtn = t.closest(".job-details-btn");
+      if (detBtn) { openDetails(detBtn.getAttribute("data-job-id")); return; }
+      var applyBtn = t.closest(".upk-apply-btn");
+      if (applyBtn) { openApplyForm(applyBtn.getAttribute("data-job-id")); return; }
+      if (t.classList.contains("upk-modal-overlay")) { closeModal(); return; }
+      if (t.closest(".upk-modal-close")) { closeModal(); return; }
+      var doneBtn = t.closest("[data-close]");
+      if (doneBtn && doneBtn.tagName === "BUTTON" && !t.closest("form")) { closeModal(); return; }
+    });
+    doc.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeModal();
+    });
+  }
+
   var lastContainerId = "jobsList";
   function renderJobs(containerId) {
     lastContainerId = containerId || "jobsList";
@@ -204,6 +399,9 @@
     if (!container) return;
     var lang = currentLang();
     var jobs = getJobs();
+
+    jobsIndex = {};
+    jobs.forEach(function (jb) { jobsIndex[jb.id] = jb; });
 
     if (!jobs.length) {
       var emptyMsg = lang === "en"
@@ -219,12 +417,10 @@
       return jobCardHTML(job, lang);
     }).join("");
 
-    // تحديث عدّاد الوظائف في قسم الإحصائيات إن وُجد
     var counter = global.document.getElementById("jobsCount");
     if (counter) counter.textContent = jobs.length;
   }
 
-  /* ----- الواجهة العامة ----- */
   global.UpKnowledgeJobs = {
     STORAGE_KEY: STORAGE_KEY,
     DEFAULT_JOBS: DEFAULT_JOBS,
@@ -234,22 +430,25 @@
     resetJobs: resetJobs,
     renderJobs: renderJobs,
     jobCardHTML: jobCardHTML,
-    esc: esc
+    esc: esc,
+    openDetails: openDetails,
+    openApplyForm: openApplyForm,
+    closeModal: closeModal
   };
 
-  // عرض تلقائي عند تحميل صفحة فيها حاوية الوظائف
   if (global.document) {
+    bindGlobalHandlers();
     global.document.addEventListener("DOMContentLoaded", function () {
       if (global.document.getElementById("jobsList")) {
         renderJobs("jobsList");
       }
     });
 
-    // إعادة العرض عند تغيير اللغة لتترجم الوظائف الافتراضية
     global.document.addEventListener("upk:langchange", function () {
       if (global.document.getElementById(lastContainerId)) {
         renderJobs(lastContainerId);
       }
+      closeModal();
     });
   }
 
