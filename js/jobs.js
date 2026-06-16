@@ -7,6 +7,10 @@
 
   var STORAGE_KEY = "upk_jobs";
 
+  var remoteJobs = null;        // وظائف من Supabase (المنشورة فقط للزوار)
+  var remoteLoaded = false;
+
+
   function currentLang() {
     try {
       if (global.UpKnowledgeI18n) return global.UpKnowledgeI18n.getLang();
@@ -104,7 +108,44 @@
     global.localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs));
   }
 
-  function getJobs() {
+  function mapRow(row) {
+    var en = row.en || {};
+    return {
+      id: row.id,
+      icon: row.icon || "fa-briefcase",
+      title: row.title,
+      department: row.department,
+      location: row.location,
+      type: row.type,
+      desc: row.description,
+      tags: row.tags || [],
+      badge: row.badge || "",
+      published: row.published,
+      en: {
+        title: en.title, department: en.department, location: en.location,
+        type: en.type, desc: en.desc, tags: en.tags, badge: en.badge
+      }
+    };
+  }
+
+  function loadRemoteJobs(opts) {
+    opts = opts || {};
+    var sb = global.upkSb;
+    if (!sb) return Promise.resolve(null);
+    var q = sb.from("jobs").select("*").order("created_at", { ascending: false });
+    if (!opts.includeHidden) { q = q.eq("published", true); }
+    return q.then(function (res) {
+      if (res.error) { console.warn("loadRemoteJobs error:", res.error); return null; }
+      remoteJobs = (res.data || []).map(mapRow);
+      remoteLoaded = true;
+      return remoteJobs;
+    }).catch(function (e) { console.warn("loadRemoteJobs failed:", e); return null; });
+  }
+
+function getJobs() {
+    if (remoteLoaded && remoteJobs) {
+      return remoteJobs.length ? remoteJobs.slice() : DEFAULT_JOBS.slice();
+    }
     var stored = getStoredJobs();
     return stored !== null ? stored : DEFAULT_JOBS.slice();
   }
@@ -594,6 +635,8 @@
   }
 
   global.UpKnowledgeJobs = {
+    loadRemoteJobs: loadRemoteJobs,
+    mapRow: mapRow,
     STORAGE_KEY: STORAGE_KEY,
     DEFAULT_JOBS: DEFAULT_JOBS,
     getJobs: getJobs,
@@ -613,6 +656,9 @@
     global.document.addEventListener("DOMContentLoaded", function () {
       if (global.document.getElementById("jobsList")) {
         renderJobs("jobsList");
+        loadRemoteJobs().then(function (rows) {
+          if (rows) renderJobs("jobsList");
+        });
       }
     });
 
