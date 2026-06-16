@@ -139,3 +139,6 @@ body.upk-modal-open{overflow:hidden}
   .upk-modal-head{flex-direction:column;gap:14px}
   .upk-modal-title{font-size:1.3rem}
 }
+
+/* UPK_PRELINE_FIX */
+.job-desc, .upk-modal-text { white-space: pre-line; }
