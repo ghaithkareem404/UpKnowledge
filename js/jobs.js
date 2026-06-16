@@ -1,3 +1,7 @@
+/* UPK_TYPEBADGE_TR */
+function upkTrType(v){ if(!v) return v; var m={"دوام كامل":"Full-time","دوام جزئي":"Part-time","عن بُعد":"Remote","تدريب":"Internship","عقد مؤقت":"Temporary"}; return m[v]||v; }
+function upkTrBadge(v){ if(!v) return v; var m={"جديد":"New","الأكثر طلباً":"Most in demand","عاجل":"Urgent"}; return m[v]||v; }
+
 /* ===== UpKnowledge - Jobs Data Layer ===== */
 /* يدير إعلانات الوظائف عبر localStorage ويعرضها في صفحة الوظائف */
 /* Bilingual aware: default jobs carry Arabic + English fields */
@@ -123,7 +127,7 @@
       published: row.published,
       en: {
         title: en.title, department: en.department, location: en.location,
-        type: en.type, desc: en.desc, tags: en.tags, badge: en.badge
+        type: en.type || upkTrType(row.type), desc: en.desc, tags: en.tags, badge: en.badge || upkTrBadge(row.badge)
       }
     };
   }
