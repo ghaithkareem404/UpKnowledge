@@ -223,3 +223,6 @@ img{max-width:100%}
     font-size: 0.85rem;
   }
 }
+
+/* UPK_LOGO_DIR_FIX */
+.logo{ direction: ltr; }
