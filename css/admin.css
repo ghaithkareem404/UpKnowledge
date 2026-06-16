@@ -71,3 +71,26 @@
   .admin-main{padding:110px 0 50px}
   .admin-card{padding:24px 20px}
 }
+
+/* ===== Admin Auth + Bilingual additions ===== */
+.auth-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#1e293b);padding:20px}
+.auth-box{background:#fff;border-radius:18px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center}
+.auth-logo{font-size:1.6rem;font-weight:800;margin-bottom:18px}
+.auth-logo .logo-mark{background:var(--primary,#f59e0b);color:#fff;padding:2px 8px;border-radius:8px;margin-inline-end:2px}
+.auth-title{font-size:1.4rem;margin:0 0 6px}
+.auth-desc{color:#64748b;font-size:.92rem;margin:0 0 22px}
+.auth-form{text-align:start}
+.auth-form .form-row{margin-bottom:16px}
+.auth-form button{width:100%;justify-content:center;margin-top:6px}
+.form-section-title{font-size:.95rem;font-weight:700;color:#334155;margin:22px 0 12px;padding-bottom:8px;border-bottom:1px dashed #e2e8f0;display:flex;align-items:center;gap:8px}
+.form-section-title:first-of-type{margin-top:0}
+.admin-job-actions{display:flex;gap:6px;align-items:center}
+.admin-icon-btn{width:34px;height:34px;border:none;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;background:#f1f5f9;color:#475569;transition:.2s}
+.admin-icon-btn:hover{background:#e2e8f0}
+.admin-icon-btn.admin-del-btn:hover{background:#fee2e2;color:#dc2626}
+.admin-icon-btn.toggle-btn:hover{background:#dcfce7;color:#16a34a}
+.admin-icon-btn.edit-btn:hover{background:#dbeafe;color:#2563eb}
+.admin-status{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:4px;margin-inline-start:6px}
+.admin-status.live{background:#dcfce7;color:#16a34a}
+.admin-status.hidden{background:#fef3c7;color:#b45309}
+.admin-job-item.is-hidden{opacity:.6}
