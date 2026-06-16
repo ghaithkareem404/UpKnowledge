@@ -189,5 +189,27 @@
 <script src="js/i18n.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/admin.js"></script>
+
+<script>
+(function(){ // UPK_GATE_FIX;
+  function gate(hasSession){
+    var ov=document.getElementById("authOverlay");
+    var app=document.getElementById("adminApp");
+    if(!ov||!app) return;
+    if(hasSession){ ov.style.display="none"; app.style.display="block"; }
+    else { ov.style.display="flex"; app.style.display="block"; }
+  }
+  function check(){
+    if(!window.upkSb||!window.upkSb.auth){ setTimeout(check,150); return; }
+    window.upkSb.auth.getSession().then(function(s){
+      gate(!!(s&&s.data&&s.data.session));
+    });
+    window.upkSb.auth.onAuthStateChange(function(evt,session){
+      gate(!!session);
+    });
+  }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",check); } else { check(); }
+})();
+</script>
 </body>
 </html>
