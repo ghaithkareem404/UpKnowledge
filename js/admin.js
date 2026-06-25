@@ -1,4 +1,4 @@
- ===== UpKnowledge - Admin Dashboard Logic (Supabase + Auth) ===== */
+/* ===== UpKnowledge - Admin Dashboard Logic (Supabase + Auth) ===== */
 /* انظر js/jobs.js (window.UpKnowledgeJobs) و window.upkSb (Supabase client) */
 
 (function () {
