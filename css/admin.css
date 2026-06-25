@@ -1,3 +1,6 @@
+
+/* ===== Fix: respect [hidden] on auth overlays (added) ===== */
+.auth-overlay[hidden] { display: none !important; }
 /* ===== UpKnowledge - Admin Dashboard Styles ===== */
 
 .admin-body{background:var(--bg-soft)}
