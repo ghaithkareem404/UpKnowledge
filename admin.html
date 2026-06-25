@@ -35,6 +35,36 @@
   </div>
 </div>
 
+
+<!-- شاشة إعادة تعيين كلمة المرور -->
+<div id="recoveryOverlay" class="auth-overlay" hidden>
+  <div class="auth-box">
+    <div class="auth-logo"><span class="logo-mark">Up</span><span class="logo-text">Knowledge</span></div>
+    <h1 class="auth-title">تعيين كلمة مرور جديدة</h1>
+    <p class="auth-desc">أدخل كلمة مرور قوية جديدة لحسابك.</p>
+    <form id="recoveryForm" class="auth-form" novalidate>
+      <div class="form-row">
+        <label for="newPassword">كلمة المرور الجديدة</label>
+        <input type="password" id="newPassword" autocomplete="new-password" dir="ltr" minlength="12" required>
+      </div>
+      <div class="form-row">
+        <label for="confirmPassword">تأكيد كلمة المرور</label>
+        <input type="password" id="confirmPassword" autocomplete="new-password" dir="ltr" minlength="12" required>
+      </div>
+      <ul id="pwRules" class="pw-rules">
+        <li data-rule="len">12 حرفاً على الأقل</li>
+        <li data-rule="upper">حرف كبير (A-Z)</li>
+        <li data-rule="lower">حرف صغير (a-z)</li>
+        <li data-rule="num">رقم (0-9)</li>
+        <li data-rule="sym">رمز خاص (!@#$...)</li>
+        <li data-rule="match">الكلمتان متطابقتان</li>
+      </ul>
+      <button type="submit" class="btn btn-primary" id="recoveryBtn"><i class="fas fa-key"></i> حفظ كلمة المرور</button>
+      <p id="recoveryMsg" class="form-msg" role="status"></p>
+    </form>
+  </div>
+</div>
+
 <!-- لوحة التحكم (تظهر بعد الدخول) -->
 <div id="adminApp" hidden>
 <header class="header scrolled" id="header">
@@ -188,6 +218,7 @@
 </script>
 <script src="js/i18n.js"></script>
 <script src="js/jobs.js"></script>
+<script src="js/recovery.js"></script>
 <script src="js/admin.js"></script>
 
 <script>
