@@ -16,6 +16,28 @@
 
   if (!sb || !overlay || !form) return;
 
+  function parseHash() {
+    var h = (window.location.hash || "").replace(/^#/, "");
+    var p = new URLSearchParams(h);
+    return p;
+  }
+
+  // اكتشاف خطأ في الرابط (رابط منتهٍ أو غير صالح)
+  var hp = parseHash();
+  var linkError = hp.get("error") || hp.get("error_code");
+  if (linkError) {
+    var desc = hp.get("error_description") || "";
+    var human = /expired|otp_expired/i.test(linkError + " " + desc)
+      ? "انتهت صلاحية رابط إعادة التعيين. اطلب رابطاً جديداً وافتحه فوراً."
+      : "رابط إعادة التعيين غير صالح. اطلب رابطاً جديداً.";
+    try { history.replaceState(null, document.title, window.location.pathname + window.location.search); } catch (e) {}
+    if (authOv && msgEl === null) {}
+    if (msgEl) { msgEl.textContent = human; msgEl.className = "form-msg show error"; }
+    var am = document.getElementById("authMsg");
+    if (am) { am.textContent = human; am.className = "form-msg show error"; }
+    return; // لا تُظهر نموذج كلمة السر مع رابط فاسد
+  }
+
   function evaluate(pw, confirm) {
     return {
       len:   pw.length >= 12,
@@ -71,20 +93,20 @@
     e.preventDefault();
     var r = paintRules();
     if (!allValid(r)) {
-      showMsg("Password does not meet all requirements.", "error");
+      showMsg("كلمة المرور لا تستوفي جميع الشروط.", "error");
       return;
     }
     if (btn) btn.disabled = true;
-    showMsg("Saving...", "success");
+    showMsg("جارٍ الحفظ…", "success");
 
     sb.auth.updateUser({ password: pwEl.value }).then(function (res) {
       if (res.error) {
         if (btn) btn.disabled = false;
-        showMsg("Failed to update password: " + res.error.message, "error");
+        showMsg("تعذّر تحديث كلمة المرور: " + res.error.message, "error");
         return;
       }
       pwEl.value = ""; confirmEl.value = "";
-      showMsg("Password updated successfully. Redirecting to login...", "success");
+      showMsg("تم تحديث كلمة المرور بنجاح. سيُعاد توجيهك لتسجيل الدخول…", "success");
       sb.auth.signOut().then(function () {
         window.setTimeout(function () {
           window.location.replace("admin.html");
@@ -92,7 +114,7 @@
       });
     }).catch(function () {
       if (btn) btn.disabled = false;
-      showMsg("An unexpected error occurred. Please try again.", "error");
+      showMsg("حدث خطأ غير متوقع. حاول مرة أخرى.", "error");
     });
   });
 })();
