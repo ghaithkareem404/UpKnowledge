@@ -218,5 +218,8 @@ if (logoutBtn) logoutBtn.addEventListener("click", function () {
   if (sb) sb.auth.signOut().then(function () { showLogin(); }).catch(function () { showLogin(); });
 });
 
+  /* ---------- Login Handler ---------- */
+  if (loginForm) loginForm.addEventListener("submit", function (e) { e.preventDefault(); if (!sb) { showMsg(authMsg, "auth unavailable", "error"); return; } var em = document.getElementById("authEmail").value.trim(); var pw = document.getElementById("authPassword").value; showMsg(authMsg, "...", ""); sb.auth.signInWithPassword({ email: em, password: pw }).then(function (res) { if (res.error) { showMsg(authMsg, "login failed", "error"); return; } showApp(false); renderAdminList(); }).catch(function () { showMsg(authMsg, "login error", "error"); }); });
+
 checkSession();
 })();
