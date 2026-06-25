@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+undefined<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -16,53 +16,52 @@
 
 <!-- شاشة تسجيل الدخول -->
 <div id="authOverlay" class="auth-overlay" hidden>
-  <div class="auth-box">
-    <div class="auth-logo"><span class="logo-mark">Up</span><span class="logo-text">Knowledge</span></div>
-    <h1 class="auth-title">تسجيل دخول المشرف</h1>
-    <p class="auth-desc">هذه الصفحة مخصصة للمشرفين فقط.</p>
-    <form id="loginForm" class="auth-form" novalidate>
-      <div class="form-row">
-        <label for="authEmail">البريد الإلكتروني</label>
-        <input type="email" id="authEmail" autocomplete="username" dir="ltr" required>
-      </div>
-      <div class="form-row">
-        <label for="authPassword">كلمة المرور</label>
-        <input type="password" id="authPassword" autocomplete="current-password" dir="ltr" required>
-      </div>
-      <button type="submit" class="btn btn-primary" id="loginBtn"><i class="fas fa-right-to-bracket"></i> دخول</button>
-      <p id="authMsg" class="form-msg" role="status"></p>
-    </form>
-  </div>
+<div class="auth-box">
+<div class="auth-logo"><span class="logo-mark">Up</span><span class="logo-text">Knowledge</span></div>
+<h1 class="auth-title">تسجيل دخول المشرف</h1>
+<p class="auth-desc">هذه الصفحة مخصصة للمشرفين فقط.</p>
+<form id="loginForm" class="auth-form" novalidate>
+<div class="form-row">
+<label for="authEmail">البريد الإلكتروني</label>
+<input type="email" id="authEmail" autocomplete="username" dir="ltr" required>
 </div>
-
+<div class="form-row">
+<label for="authPassword">كلمة المرور</label>
+<input type="password" id="authPassword" autocomplete="current-password" dir="ltr" required>
+</div>
+<button type="submit" class="btn btn-primary" id="loginBtn"><i class="fas fa-right-to-bracket"></i> دخول</button>
+<p id="authMsg" class="form-msg" role="status"></p>
+</form>
+</div>
+</div>
 
 <!-- شاشة إعادة تعيين كلمة المرور -->
 <div id="recoveryOverlay" class="auth-overlay" hidden>
-  <div class="auth-box">
-    <div class="auth-logo"><span class="logo-mark">Up</span><span class="logo-text">Knowledge</span></div>
-    <h1 class="auth-title">تعيين كلمة مرور جديدة</h1>
-    <p class="auth-desc">أدخل كلمة مرور قوية جديدة لحسابك.</p>
-    <form id="recoveryForm" class="auth-form" novalidate>
-      <div class="form-row">
-        <label for="newPassword">كلمة المرور الجديدة</label>
-        <input type="password" id="newPassword" autocomplete="new-password" dir="ltr" minlength="12" required>
-      </div>
-      <div class="form-row">
-        <label for="confirmPassword">تأكيد كلمة المرور</label>
-        <input type="password" id="confirmPassword" autocomplete="new-password" dir="ltr" minlength="12" required>
-      </div>
-      <ul id="pwRules" class="pw-rules">
-        <li data-rule="len">12 حرفاً على الأقل</li>
-        <li data-rule="upper">حرف كبير (A-Z)</li>
-        <li data-rule="lower">حرف صغير (a-z)</li>
-        <li data-rule="num">رقم (0-9)</li>
-        <li data-rule="sym">رمز خاص (!@#$...)</li>
-        <li data-rule="match">الكلمتان متطابقتان</li>
-      </ul>
-      <button type="submit" class="btn btn-primary" id="recoveryBtn"><i class="fas fa-key"></i> حفظ كلمة المرور</button>
-      <p id="recoveryMsg" class="form-msg" role="status"></p>
-    </form>
-  </div>
+<div class="auth-box">
+<div class="auth-logo"><span class="logo-mark">Up</span><span class="logo-text">Knowledge</span></div>
+<h1 class="auth-title">تعيين كلمة مرور جديدة</h1>
+<p class="auth-desc">أدخل كلمة مرور قوية جديدة لحسابك.</p>
+<form id="recoveryForm" class="auth-form" novalidate>
+<div class="form-row">
+<label for="newPassword">كلمة المرور الجديدة</label>
+<input type="password" id="newPassword" autocomplete="new-password" dir="ltr" minlength="12" required>
+</div>
+<div class="form-row">
+<label for="confirmPassword">تأكيد كلمة المرور</label>
+<input type="password" id="confirmPassword" autocomplete="new-password" dir="ltr" minlength="12" required>
+</div>
+<ul id="pwRules" class="pw-rules">
+<li data-rule="len">12 حرفاً على الأقل</li>
+<li data-rule="upper">حرف كبير (A-Z)</li>
+<li data-rule="lower">حرف صغير (a-z)</li>
+<li data-rule="num">رقم (0-9)</li>
+<li data-rule="sym">رمز خاص (!@#$...)</li>
+<li data-rule="match">الكلمتان متطابقتان</li>
+</ul>
+<button type="submit" class="btn btn-primary" id="recoveryBtn"><i class="fas fa-key"></i> حفظ كلمة المرور</button>
+<p id="recoveryMsg" class="form-msg" role="status"></p>
+</form>
+</div>
 </div>
 
 <!-- لوحة التحكم (تظهر بعد الدخول) -->
@@ -95,7 +94,11 @@
 <form id="jobForm" class="job-form" novalidate>
 <input type="hidden" id="jobId" name="jobId" value="">
 
-<h3 class="form-section-title"><i class="fas fa-language"></i> العربية</h3>
+<h3 class="form-section-title"><i class="fas fa-briefcase"></i> البيانات الأساسية</h3>
+<div class="form-row">
+<label for="company">اسم الشركة <span class="req">*</span></label>
+<input type="text" id="company" name="company" placeholder="مثال: شركة الأحلام للتكنولوجيا" required>
+</div>
 <div class="form-row">
 <label for="title">المسمى الوظيفي <span class="req">*</span></label>
 <input type="text" id="title" name="title" placeholder="مثال: مطوّر واجهات أمامية" required>
@@ -110,137 +113,137 @@
 <input type="text" id="location" name="location" value="بغداد، العراق" required>
 </div>
 </div>
+<div class="form-grid-2">
+<div class="form-row">
+<label for="type">نوع الدوام <span class="req">*</span></label>
+<select id="type" name="type" required>
+<option value="دوام كامل">دوام كامل (Full-time)</option>
+<option value="دوام جزئي">دوام جزئي (Part-time)</option>
+<option value="عن بُعد">عن بُعد (Remote)</option>
+<option value="تدريب">تدريب (Internship)</option>
+<option value="عقد مؤقت">عقد مؤقت (Temporary)</option>
+</select>
+</div>
+<div class="form-row">
+<label for="jobDate">تاريخ الإعلان <span class="req">*</span></label>
+<input type="date" id="jobDate" name="jobDate" required>
+</div>
+</div>
+
+<h3 class="form-section-title"><i class="fas fa-file-alt"></i> التفاصيل</h3>
 <div class="form-row">
 <label for="desc">وصف الوظيفة <span class="req">*</span></label>
 <textarea id="desc" name="desc" rows="3" placeholder="وصف مختصر للمهام والمسؤوليات..." required></textarea>
+</div>
+<div class="form-row">
+<label for="skills">المهارات المطلوبة <span class="hint">(افصل بينها بفاصلة)</span></label>
+<textarea id="skills" name="skills" rows="2" placeholder="مثال: JavaScript, React, REST APIs"></textarea>
+</div>
+<div class="form-row">
+<label for="experience">الخبرات المطلوبة <span class="hint">(افصل بينها بفاصلة)</span></label>
+<textarea id="experience" name="experience" rows="2" placeholder="مثال: سنتان في تطوير الويب, معرفة بقواعد البيانات"></textarea>
 </div>
 <div class="form-row">
 <label for="tags">الوسوم <span class="hint">(افصل بينها بفاصلة)</span></label>
 <input type="text" id="tags" name="tags" placeholder="مثال: برمجة, واجهات, JavaScript">
 </div>
 
-<h3 class="form-section-title"><i class="fas fa-language"></i> English</h3>
+<h3 class="form-section-title"><i class="fas fa-language"></i> الإصدار الإنجليزي</h3>
 <div class="form-row">
-<label for="title_en">Job title</label>
-<input type="text" id="title_en" name="title_en" dir="ltr" placeholder="e.g. Front-end Developer">
+<label for="company_en">Company Name</label>
+<input type="text" id="company_en" name="company_en" placeholder="e.g. Dream Tech Company" dir="ltr">
+</div>
+<div class="form-row">
+<label for="title_en">Job Title</label>
+<input type="text" id="title_en" name="title_en" placeholder="e.g. Front-end Developer" dir="ltr">
 </div>
 <div class="form-grid-2">
 <div class="form-row">
 <label for="department_en">Department</label>
-<input type="text" id="department_en" name="department_en" dir="ltr" placeholder="e.g. IT Department">
+<input type="text" id="department_en" name="department_en" placeholder="e.g. IT Department" dir="ltr">
 </div>
 <div class="form-row">
 <label for="location_en">Location</label>
-<input type="text" id="location_en" name="location_en" dir="ltr" value="Baghdad, Iraq">
+<input type="text" id="location_en" name="location_en" value="Baghdad, Iraq" dir="ltr">
 </div>
 </div>
 <div class="form-row">
-<label for="desc_en">Job description</label>
-<textarea id="desc_en" name="desc_en" rows="3" dir="ltr" placeholder="Short description of duties and responsibilities..."></textarea>
+<label for="desc_en">Job Description</label>
+<textarea id="desc_en" name="desc_en" rows="3" placeholder="Brief description of duties and responsibilities..." dir="ltr"></textarea>
 </div>
 <div class="form-row">
-<label for="tags_en">Tags <span class="hint">(comma separated)</span></label>
-<input type="text" id="tags_en" name="tags_en" dir="ltr" placeholder="e.g. Coding, Frontend, JavaScript">
+<label for="skills_en">Required Skills</label>
+<textarea id="skills_en" name="skills_en" rows="2" placeholder="e.g. JavaScript, React, REST APIs" dir="ltr"></textarea>
+</div>
+<div class="form-row">
+<label for="experience_en">Required Experience</label>
+<textarea id="experience_en" name="experience_en" rows="2" placeholder="e.g. 2+ years in web development" dir="ltr"></textarea>
+</div>
+<div class="form-row">
+<label for="tags_en">Tags</label>
+<input type="text" id="tags_en" name="tags_en" placeholder="e.g. programming, frontend, javascript" dir="ltr">
 </div>
 
-<h3 class="form-section-title"><i class="fas fa-sliders"></i> إعدادات</h3>
+<h3 class="form-section-title"><i class="fas fa-palette"></i> الإضافيات</h3>
 <div class="form-grid-2">
 <div class="form-row">
-<label for="type">نوع الدوام</label>
-<select id="type" name="type">
-<option value="دوام كامل">دوام كامل</option>
-<option value="دوام جزئي">دوام جزئي</option>
-<option value="عن بُعد">عن بُعد</option>
-<option value="تدريب">تدريب</option>
-<option value="عقد مؤقت">عقد مؤقت</option>
-</select>
+<label for="icon">أيقونة <span class="hint">(Font Awesome)</span></label>
+<input type="text" id="icon" name="icon" value="fa-briefcase" placeholder="مثال: fa-briefcase">
 </div>
 <div class="form-row">
-<label for="icon">الأيقونة</label>
-<select id="icon" name="icon">
-<option value="fa-briefcase">عام (حقيبة)</option>
-<option value="fa-users-gear">موارد بشرية</option>
-<option value="fa-server">بنية تحتية</option>
-<option value="fa-cubes">Odoo / أنظمة</option>
-<option value="fa-bullhorn">مبيعات / تسويق</option>
-<option value="fa-code">برمجة</option>
-<option value="fa-chart-line">تحليل بيانات</option>
-<option value="fa-headset">دعم فني</option>
-</select>
-</div>
-</div>
-<div class="form-row">
-<label for="badge">شارة (اختياري)</label>
+<label for="badge">الشارة <span class="hint">(جديد/عاجل/...)</span></label>
 <select id="badge" name="badge">
 <option value="">بدون شارة</option>
-<option value="جديد">جديد</option>
-<option value="الأكثر طلباً">الأكثر طلباً</option>
-<option value="عاجل">عاجل</option>
+<option value="جديد">جديد (New)</option>
+<option value="الأكثر طلباً">الأكثر طلباً (Most in demand)</option>
+<option value="عاجل">عاجل (Urgent)</option>
 </select>
 </div>
-<div class="form-actions">
-<button type="submit" class="btn btn-primary" id="submitJobBtn"><i class="fas fa-paper-plane"></i> نشر الإعلان</button>
-<button type="button" class="btn btn-ghost-dark" id="cancelEditBtn" hidden>إلغاء التعديل</button>
-<button type="reset" class="btn btn-ghost-dark">مسح الحقول</button>
 </div>
+
+<button type="submit" class="btn btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> نشر الإعلان</button>
+<button type="button" class="btn btn-secondary" id="cancelEditBtn" hidden><i class="fas fa-times"></i> إلغاء التعديل</button>
 <p id="formMsg" class="form-msg" role="status"></p>
 </form>
 </section>
 
 <section class="admin-card list-card">
-<div class="list-head">
-<h2 class="card-heading"><i class="fas fa-list-check"></i> الإعلانات <span id="countBadge" class="count-badge">0</span></h2>
+<h2 class="card-heading"><i class="fas fa-list"></i> الوظائف المنشورة</h2>
+<div id="jobsList" class="jobs-list">
+<!-- تُعرض الوظائف ديناميكياً من js/admin.js -->
 </div>
-<div id="adminJobsList" class="admin-jobs-list"></div>
 </section>
 
 </div>
+
 </div>
 </main>
 
-<footer class="footer">
-<div class="footer-bottom"><div class="container">© 2024 UpKnowledge — لوحة التحكم. جميع الحقوق محفوظة.</div></div>
-</footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<footer class="footer">
+<div class="container header-inner">
+<span>© 2024 UpKnowledge. جميع الحقوق محفوظة.</span>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/module.min.js"></script>
 <script>
-  window.UPK_SUPABASE = {
-    url: "https://bgamaofokqiicgauqfrx.supabase.co",
-    key: "sb_publishable_hHSPLC_aAFvqTtlSCBj0MQ_rrTrbCyB",
-    bucket: "Private"
-  };
-  try {
-    if (window.supabase && window.UPK_SUPABASE.url) {
-      window.upkSb = window.supabase.createClient(window.UPK_SUPABASE.url, window.UPK_SUPABASE.key);
-    }
-  } catch (e) { console.error("Supabase init failed", e); }
+window.UPK_SUPABASE = {
+url: "https://bgamaofokqiicgauqfrx.supabase.co",
+key: "sb_publishable_hHSPLC_aAFvqTtlSCBj0MQ_rrTrbCyB",
+bucket: "Private"
+};
+try {
+if (window.supabase && window.UPK_SUPABASE.url) {
+window.upkSb = window.supabase.createClient(window.UPK_SUPABASE.url, window.UPK_SUPABASE.key);
+}
+} catch (e) { console.error("Supabase init failed:", e); }
 </script>
 <script src="js/i18n.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/recovery.js"></script>
 <script src="js/admin.js"></script>
 
-<script>
-(function(){ // UPK_GATE_FIX;
-  function gate(hasSession){
-    var ov=document.getElementById("authOverlay");
-    var app=document.getElementById("adminApp");
-    if(!ov||!app) return;
-    if(hasSession){ ov.style.display="none"; app.style.display="block"; }
-    else { ov.style.display="flex"; app.style.display="block"; }
-  }
-  function check(){
-    if(!window.upkSb||!window.upkSb.auth){ setTimeout(check,150); return; }
-    window.upkSb.auth.getSession().then(function(s){
-      gate(!!(s&&s.data&&s.data.session));
-    });
-    window.upkSb.auth.onAuthStateChange(function(evt,session){
-      gate(!!session);
-    });
-  }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",check); } else { check(); }
-})();
-</script>
 </body>
 </html>
