@@ -166,5 +166,21 @@
 <script src="js/i18n.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/script.js"></script>
+  <script>
+    // تحديث عدد الفرص المتاحة ديناميكياً
+    window.updateJobsCount = function(count) {
+        var el = document.getElementById('jobsCount');
+        if (el) el.textContent = count;
+    };
+
+    // تحديث العدد عند تحميل الوظائف
+    if (window.UpKnowledgeJobs) {
+        window.UpKnowledgeJobs.loadRemoteJobs().then(function(jobs) {
+              var count = jobs ? jobs.length : 0;
+              window.updateJobsCount(count);
+        });
+    }
+      </script>
+  </script>
 </body>
 </html>
