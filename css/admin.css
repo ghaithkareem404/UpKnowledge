@@ -94,3 +94,11 @@
 .admin-status.live{background:#dcfce7;color:#16a34a}
 .admin-status.hidden{background:#fef3c7;color:#b45309}
 .admin-job-item.is-hidden{opacity:.6}
+
+
+/* ===== Password Recovery Rules (added) ===== */
+.pw-rules { list-style:none; padding:0; margin:.5rem 0; font-size:.85rem; }
+.pw-rules li { color:#b00020; padding:2px 0; transition:color .2s; }
+.pw-rules li::before { content:"\2717 "; }
+.pw-rules li.ok { color:#1b873f; }
+.pw-rules li.ok::before { content:"\2713 "; }
