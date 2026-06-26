@@ -113,3 +113,9 @@
 .auth-form input::placeholder{color:#9aa5b5;}
 .auth-form input:hover{border-color:#cfd6e2;}
 .auth-form input:focus{background:#ffffff;border-color:#f0a83c;box-shadow:0 0 0 4px rgba(240,168,60,.18);}
+
+
+/* ===== UK logo image on login page (added) ===== */
+.auth-logo{display:flex;align-items:center;justify-content:center;gap:8px;}
+.auth-logo .logo-mark{display:inline-block;width:40px;height:46px;padding:0;margin:0;background:url("../uk-logo.png") no-repeat center/contain;border-radius:0;font-size:0;line-height:0;text-indent:-9999px;overflow:hidden;}
+.auth-logo .logo-text{color:#092442;font-weight:800;}
