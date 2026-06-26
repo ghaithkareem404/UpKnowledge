@@ -105,3 +105,11 @@
 .pw-rules li::before { content:"\2717 "; }
 .pw-rules li.ok { color:#1b873f; }
 .pw-rules li.ok::before { content:"\2713 "; }
+
+
+/* ===== Modern login input fields (added) ===== */
+.auth-form .form-row label{display:block;margin-bottom:8px;font-weight:600;font-size:14px;color:#092442;}
+.auth-form input{width:100%;box-sizing:border-box;padding:13px 16px;font-size:15px;color:#092442;background:#f7f9fc;border:1.5px solid #e3e8ef;border-radius:12px;outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;}
+.auth-form input::placeholder{color:#9aa5b5;}
+.auth-form input:hover{border-color:#cfd6e2;}
+.auth-form input:focus{background:#ffffff;border-color:#f0a83c;box-shadow:0 0 0 4px rgba(240,168,60,.18);}
