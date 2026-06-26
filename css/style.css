@@ -256,3 +256,9 @@ img,svg,video,canvas{max-width:100%;height:auto}
 @media (max-width:600px){
   .trusted-logos,.hero-badge{white-space:normal}
 }
+
+
+/* ===== UK logo image (added) ===== */
+.logo-mark{display:inline-block;width:34px;height:38px;padding:0;margin-left:8px;background:url("../uk-logo.png") no-repeat center/contain;border-radius:0;font-size:0;line-height:0;text-indent:-9999px;overflow:hidden;vertical-align:middle;}
+.logo{align-items:center;}
+.footer .logo-mark{filter:brightness(0) invert(1);}
