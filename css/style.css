@@ -162,7 +162,7 @@ img{max-width:100%}
 /* Footer */
 .footer{background:var(--navy);color:#fff;padding:60px 0 0}
 .footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:46px}
-.footer-brand .logo{margin-bottom:16px}
+.footer-brand .logo{display:inline-flex;margin-bottom:16px}
 .footer-brand .logo-text{color:#fff}
 .footer-brand p{color:rgba(255,255,255,.7);font-size:15px;max-width:320px}
 .footer-col h5{font-size:17px;font-weight:800;margin-bottom:20px;color:var(--sand)}
