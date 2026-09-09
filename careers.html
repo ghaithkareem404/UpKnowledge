@@ -52,7 +52,7 @@
 <h1 class="careers-hero-title" data-i18n-html="careers.heroTitle">نوصلك بفرصتك المهنية القادمة مع <span class="gradient-text">UpKnowledge</span></h1>
 <p class="careers-hero-sub" data-i18n="careers.heroSub">نعمل كحلقة وصل بين المواهب والشركات. ننشر فرص عمل حقيقية نيابةً عن شركائنا من الشركات، ونتولّى عنك رحلة التوظيف كاملة — من التقديم إلى استلام العرض.</p>
 <div class="careers-hero-stats">
-<div class="stat"><span class="stat-num" id="jobsCount">4</span><span class="stat-label" data-i18n="careers.stat1">فرص متاحة</span></div>
+<div class="stat"><span class="stat-num" id="jobsCount">0</span><span class="stat-label" data-i18n="careers.stat1">فرص متاحة</span></div>
 <div class="stat"><span class="stat-num">+15</span><span class="stat-label" data-i18n="careers.stat2">شركة شريكة</span></div>
 <div class="stat"><span class="stat-num">100%</span><span class="stat-label" data-i18n="careers.stat3">خدمة مجانية للمرشّحين</span></div>
 </div>
@@ -179,21 +179,5 @@
 <script src="js/i18n.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/script.js"></script>
-  <script>
-    // تحديث عدد الفرص المتاحة ديناميكياً
-    window.updateJobsCount = function(count) {
-        var el = document.getElementById('jobsCount');
-        if (el) el.textContent = count;
-    };
-
-    // تحديث العدد عند تحميل الوظائف
-    if (window.UpKnowledgeJobs) {
-        window.UpKnowledgeJobs.loadRemoteJobs().then(function(jobs) {
-              var count = jobs ? jobs.length : 0;
-              window.updateJobsCount(count);
-        });
-    }
-      </script>
-  </script>
 </body>
 </html>

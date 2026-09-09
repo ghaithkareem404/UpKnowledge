@@ -69,11 +69,27 @@ img{max-width:100%}
 .hero-shape{position:absolute;bottom:-1px;left:0;right:0;height:80px;background:var(--white);clip-path:polygon(0 100%,100% 100%,100% 35%,0 75%);z-index:1}
 
 /* Trusted */
-.trusted{padding:50px 0;background:var(--white)}
-.trusted-label{text-align:center;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:26px;letter-spacing:.5px}
-.trusted-logos{display:flex;justify-content:center;align-items:center;gap:54px;flex-wrap:wrap}
-.trusted-logos span{font-size:40px;color:#c4cedb;transition:var(--t)}
-.trusted-logos span:hover{color:var(--navy);transform:translateY(-4px)}
+/* ===== Clients ===== */
+.clients{padding:80px 0;background:var(--white)}
+.clients-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-top:46px}
+.client-card{flex:0 1 172px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:16px;margin:0;padding:26px 18px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);transition:var(--t)}
+.client-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.client-logo{width:100%;height:88px;display:flex;align-items:center;justify-content:center}
+.client-logo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:grayscale(1);opacity:.62;transition:var(--t)}
+.client-card:hover .client-logo img{filter:grayscale(0);opacity:1}
+.client-name{font-size:13.5px;font-weight:600;color:var(--muted);text-align:center;line-height:1.6;min-height:2.6em;transition:var(--t)}
+.client-card:hover .client-name{color:var(--navy)}
+@media (max-width:768px){
+  .clients{padding:60px 0}
+  .clients-grid{gap:14px}
+  .client-card{flex:0 1 140px;padding:20px 12px;gap:12px}
+  .client-logo{height:64px}
+  .client-name{font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  .client-card,.client-logo img,.client-name{transition:none}
+  .client-card:hover{transform:none}
+}
 
 /* Section heading */
 .section-head{text-align:center;max-width:680px;margin:0 auto 60px}

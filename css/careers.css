@@ -142,3 +142,15 @@ body.upk-modal-open{overflow:hidden}
 
 /* UPK_PRELINE_FIX */
 .job-desc, .upk-modal-text { white-space: pre-line; }
+
+/* ===== Copy job link button ===== */
+.job-copy-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line);color:var(--muted);font-family:inherit;font-size:.85rem;font-weight:600;padding:9px 16px;border-radius:50px;cursor:pointer;transition:var(--t);white-space:nowrap}
+.job-copy-btn:hover{border-color:var(--navy-3);color:var(--navy);background:var(--bg-soft)}
+.job-copy-btn.copied{border-color:#2e9e5b;color:#2e9e5b;background:rgba(46,158,91,.08)}
+.upk-modal-foot{gap:12px;align-items:center;flex-wrap:wrap}
+.upk-modal-foot .job-copy-btn{margin-inline-end:auto}
+@media (max-width:768px){
+  .job-action{flex-wrap:wrap;gap:10px}
+  .upk-modal-foot{justify-content:stretch}
+  .upk-modal-foot .job-copy-btn{margin-inline-end:0}
+}
